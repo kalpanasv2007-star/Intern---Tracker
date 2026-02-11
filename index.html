@@ -1,57 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RECRUITMENT_COMMAND_CENTER</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMMAND_CENTER // INTERN_TRACKER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body onload="app.fetchStats()">
-    <div class="scanline"></div>
-    <div class="terminal-container">
-        <header>
-            <h1 class="glitch" data-text="INTERN_TRACKER_V1.0">INTERN_TRACKER_V1.0</h1>
-            <div class="status-bar">SYSTEM_STATUS: <span class="online">ONLINE</span> | USER: ROOT</div>
-        </header>
+<body>
 
-        <div class="stats-grid">
-            <div class="stat-box"><h3>TOTAL_OPS</h3><p id="total">0</p></div>
-            <div class="stat-box"><h3>INTERVIEWS</h3><p id="interviews">0</p></div>
-            <div class="stat-box"><h3>WIN_RATE</h3><p id="winrate">0%</p></div>
-        </div>
+  <div class="glitch-header">INTERNSHIP_TRACKER</div>
 
-        <section class="input-area">
-            <h2>> INITIALIZE_ENTRY</h2>
-            <div class="controls">
-                <input type="text" id="company" placeholder="TARGET_COMPANY">
-                <input type="text" id="role" placeholder="DESIGNATION">
-                <select id="status">
-                    <option value="Applied">APPLIED</option>
-                    <option value="Interview">INTERVIEW</option>
-                    <option value="Selected">SELECTED</option>
-                    <option value="Rejected">REJECTED</option>
-                </select>
-                <button onclick="app.sendData()" id="deployBtn">DEPLOY_TO_GRID</button>
-            </div>
-        </section>
-
-        <section class="log-area">
-            <h2>> MISSION_LOG</h2>
-            <input type="text" id="search" onkeyup="app.filterTable()" placeholder="FILTER_BY_TARGET...">
-            <table id="targetTable">
-                <thead>
-                    <tr>
-                        <th>TARGET</th>
-                        <th>ROLE</th>
-                        <th>STATUS</th>
-                        <th>TIMESTAMP</th>
-                    </tr>
-                </thead>
-                <tbody id="logBody">
-                    </tbody>
-            </table>
-        </section>
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stat-box" id="box-total"><h3>TOTAL_OPS</h3><p id="stat-total">0</p></div>
+      <div class="stat-box" id="box-interview"><h3>INTERVIEWS</h3><p id="stat-interview">0</p></div>
+      <div class="stat-box" id="box-success"><h3>SECURED</h3><p id="stat-selected">0</p></div>
+      <div class="stat-box"><h3>WIN_RATE</h3><p id="stat-rate">0%</p></div>
     </div>
-    <script src="script.js"></script>
+
+    <div class="card">
+      <h2 style="color:var(--accent)">> INITIALIZE_ENTRY</h2>
+      <label>COMPANY</label><input id="company" placeholder="TARGET NAME...">
+      <label>ROLE</label><input id="role" placeholder="DESIGNATION...">
+      <label>STATUS</label>
+      <select id="status">
+        <option>Applied</option>
+        <option>Interview</option>
+        <option>Selected</option>
+        <option>Rejected</option>
+      </select>
+      <button class="btn-deploy" onclick="sendData()">Deploy to Grid</button>
+    </div>
+
+    <div class="card">
+      <h2 style="color:var(--primary)">> MISSION_LOG</h2>
+      <input type="text" id="searchInput" class="search-terminal" placeholder="FILTER BY COMPANY..." onkeyup="filterTable()">
+      <div style="max-height: 400px; overflow-y: auto;">
+        <table id="logTable">
+          <thead>
+            <tr><th>TARGET</th><th>ROLE</th><th>STATUS</th><th>ACTION</th></tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
