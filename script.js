@@ -1,51 +1,29 @@
-:root {
-    --neon-green: #00ff41;
-    --dark-bg: #0a0a0a;
-    --glass: rgba(0, 255, 65, 0.1);
-}
+const app = {
+    // PASTE YOUR GOOGLE DEPLOYMENT URL BETWEEN THE QUOTES BELOW
+    URL: "https://script.google.com/macros/s/AKfycbwjib0MiBVHsJeEaBXV5HSJUNsMkZ2ZHaCeDFvylPomMWeeNBn8LBSJ5YlPaOOgLj0/exec",
 
-body {
-    background-color: var(--dark-bg);
-    color: var(--neon-green);
-    font-family: 'Courier New', monospace;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    async sendData() {
+        const company = document.getElementById('company').value;
+        const role = document.getElementById('role').value;
+        const status = document.getElementById('status').value;
 
-.terminal-border {
-    border: 2px solid var(--neon-green);
-    padding: 20px;
-    box-shadow: 0 0 15px var(--neon-green);
-    background: var(--glass);
-    width: 90%;
-    max-width: 800px;
-}
+        if(!company || !role) return alert("Enter all fields!");
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
+        const btn = document.querySelector('button');
+        btn.innerText = "UPLOADING...";
 
-th, td {
-    border: 1px solid var(--neon-green);
-    padding: 10px;
-    text-align: left;
-}
-
-input, select, button {
-    background: transparent;
-    border: 1px solid var(--neon-green);
-    color: var(--neon-green);
-    padding: 8px;
-    margin: 5px 0;
-}
-
-button:hover {
-    background: var(--neon-green);
-    color: black;
-    cursor: pointer;
-}
+        try {
+            await fetch(this.URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                cache: 'no-cache',
+                body: JSON.stringify({ company, role, status })
+            });
+            alert("DEPLOYED TO GRID!");
+            location.reload();
+        } catch (err) {
+            console.error(err);
+            alert("ERROR IN UPLOAD");
+        }
+    }
+};
