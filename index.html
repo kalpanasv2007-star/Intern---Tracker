@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMMAND_CENTER // INTERN_TRACKER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="glitch-header" data-text="INTERNSHIP_TRACKER">INTERNSHIP_TRACKER</div>
+
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stat-box" id="box-total"><h3>TOTAL_OPS</h3><p id="stat-total">0</p></div>
+      <div class="stat-box" id="box-interview"><h3>INTERVIEWS</h3><p id="stat-interview">0</p></div>
+      <div class="stat-box" id="box-success"><h3>SECURED</h3><p id="stat-selected">0</p></div>
+      <div class="stat-box"><h3>WIN_RATE</h3><p id="stat-rate">0%</p></div>
+    </div>
+
+    <div class="card card-input">
+      <h2 class="section-title">> INITIALIZE_ENTRY</h2>
+      <div class="input-group">
+        <label>COMPANY</label>
+        <input id="company" type="text" placeholder="TARGET NAME..." required>
+      </div>
+      <div class="input-group">
+        <label>ROLE</label>
+        <input id="role" type="text" placeholder="DESIGNATION..." required>
+      </div>
+      <div class="input-group">
+        <label>STATUS</label>
+        <select id="status">
+          <option value="Applied">Applied</option>
+          <option value="Interview">Interview</option>
+          <option value="Selected">Selected</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+      <button class="btn-deploy" id="deployBtn" onclick="app.sendData()">Deploy to Grid</button>
+    </div>
+
+    <div class="card card-log">
+      <h2 class="section-title">> MISSION_LOG</h2>
+      <input type="text" id="searchInput" class="search-terminal" placeholder="FILTER BY COMPANY..." onkeyup="app.filterTable()">
+      <div class="table-wrapper">
+        <table id="logTable">
+          <thead>
+            <tr><th>TARGET</th><th>ROLE</th><th>STATUS</th><th>ACTION</th></tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
