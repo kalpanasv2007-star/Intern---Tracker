@@ -1,5 +1,4 @@
 const app = {
-    // PASTE YOUR GOOGLE DEPLOYMENT URL BETWEEN THE QUOTES BELOW
     URL: "https://script.google.com/macros/s/AKfycbwjib0MiBVHsJeEaBXV5HSJUNsMkZ2ZHaCeDFvylPomMWeeNBn8LBSJ5YlPaOOgLj0/exec",
 
     async sendData() {
@@ -7,23 +6,32 @@ const app = {
         const role = document.getElementById('role').value;
         const status = document.getElementById('status').value;
 
-        if(!company || !role) return alert("Enter all fields!");
+        if(!company || !role) {
+            alert("SYSTEM_ERROR: FIELDS_EMPTY");
+            return;
+        }
 
-        const btn = document.querySelector('button');
-        btn.innerText = "UPLOADING...";
+        document.getElementById('deployBtn').innerText = "SYNCHRONIZING...";
 
         try {
             await fetch(this.URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                cache: 'no-cache',
                 body: JSON.stringify({ company, role, status })
             });
-            alert("DEPLOYED TO GRID!");
+            alert("TRANSMISSION_SUCCESS");
             location.reload();
-        } catch (err) {
-            console.error(err);
-            alert("ERROR IN UPLOAD");
+        } catch (e) {
+            alert("UPLINK_FAILED");
+        }
+    },
+
+    filterTable() {
+        let input = document.getElementById('search').value.toUpperCase();
+        let rows = document.getElementById('targetTable').getElementsByTagName('tr');
+        for (let i = 1; i < rows.length; i++) {
+            let txt = rows[i].textContent || rows[i].innerText;
+            rows[i].style.display = txt.toUpperCase().indexOf(input) > -1 ? "" : "none";
         }
     }
 };
